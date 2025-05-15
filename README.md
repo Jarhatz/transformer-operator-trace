@@ -4,6 +4,10 @@ The first, is a real-time trace of a decoder layer from any HuggingFace autoregr
 The second is a simulated trace for performing transformer operations on a hardware resource with an adjustable number of compute engines (threads).
 Both scripts will attempt to automatically open a browser window with the Perfetto Chrome trace.
 
+## Setup
+1. Make sure PyTorch is installed on your environment. Follow their [instructions](https://pytorch.org/get-started/locally/) to install and build on your specific platform.
+2. `pip install transformers`
+
 ## Real-Time Trace
 ```bash
 python src/realtime/trace.py --model_id meta-llama/Llama-3.2-1B --n_tokens 512
