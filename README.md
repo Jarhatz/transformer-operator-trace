@@ -22,3 +22,7 @@ All threads are synchronized when a preceding operation is required to finish pr
 Otherwise, a parallel execution is launched whenever there is an available engine.
 The duration of each operation `(ie. MatMul, MatAdd, Norm, ROPE, Cache (Memory Access), SoftMax(1,2,3 Stages), etc.)` is approximated using a simple formula based on input size and operation attributes.
 All of this logic can be found in the `TransformerOpSimulator` class in `src/simulate/simulator.py` and `ComputeScheduler` class in `src/simulate/scheduler.py`.
+
+![Visual Trace](trace/visual_trace.png)
+
+**BONUS**: For the bonus task, I have implemented a simple scheduling algorithm which can adapt to a hardware resource with any number of compute engines. Under the current implementation and the assumed kernel definitions, the optimal number of threads concurrently utilized during a transformer decoder layer is `3`. As shown in the figure above, the highest parallelization that can be done is the computation of `Q`, `K`, and `V` in parallel assuming the `MatMul` operator is the core kernel operation.
