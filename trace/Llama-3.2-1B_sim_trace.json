@@ -1,0 +1,464 @@
+{
+  "traceEvents": [
+    {
+      "name": "RMSNorm (pre)",
+      "ph": "X",
+      "ts": 100000000000,
+      "dur": 307,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "Norm",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          2048
+        ]
+      }
+    },
+    {
+      "name": "Q Projection",
+      "ph": "X",
+      "ts": 100000000407,
+      "dur": 52428,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          2048
+        ]
+      }
+    },
+    {
+      "name": "K Projection",
+      "ph": "X",
+      "ts": 100000000407,
+      "dur": 13107,
+      "pid": 1,
+      "tid": 2,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          512
+        ]
+      }
+    },
+    {
+      "name": "V Projection",
+      "ph": "X",
+      "ts": 100000000407,
+      "dur": 13107,
+      "pid": 1,
+      "tid": 3,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          512
+        ]
+      }
+    },
+    {
+      "name": "ROPE (Q)",
+      "ph": "X",
+      "ts": 100000052935,
+      "dur": 153,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "ROPE",
+        "input_size": [
+          1,
+          32,
+          1,
+          64
+        ],
+        "output_size": [
+          1,
+          32,
+          1,
+          64
+        ]
+      }
+    },
+    {
+      "name": "ROPE (K)",
+      "ph": "X",
+      "ts": 100000052935,
+      "dur": 38,
+      "pid": 1,
+      "tid": 2,
+      "args": {
+        "op_type": "ROPE",
+        "input_size": [
+          1,
+          8,
+          1,
+          64
+        ],
+        "output_size": [
+          1,
+          8,
+          1,
+          64
+        ]
+      }
+    },
+    {
+      "name": "KV Cache (K)",
+      "ph": "X",
+      "ts": 100000053188,
+      "dur": 9868,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "Cache",
+        "input_size": [
+          1,
+          8,
+          1,
+          64
+        ],
+        "output_size": [
+          1,
+          32,
+          257,
+          64
+        ]
+      }
+    },
+    {
+      "name": "KV Cache (V)",
+      "ph": "X",
+      "ts": 100000053188,
+      "dur": 9907,
+      "pid": 1,
+      "tid": 2,
+      "args": {
+        "op_type": "Cache",
+        "input_size": [
+          1,
+          8,
+          1,
+          64
+        ],
+        "output_size": [
+          1,
+          32,
+          257,
+          64
+        ]
+      }
+    },
+    {
+      "name": "Attention Weights (QK^T)",
+      "ph": "X",
+      "ts": 100000063195,
+      "dur": 1638,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          32,
+          1,
+          64
+        ],
+        "output_size": [
+          1,
+          32,
+          1,
+          257
+        ]
+      }
+    },
+    {
+      "name": "Softmax - Find Max",
+      "ph": "X",
+      "ts": 100000064933,
+      "dur": 411,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "Softmax.1",
+        "input_size": [
+          1,
+          32,
+          1,
+          257
+        ],
+        "output_size": [
+          1,
+          32,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "Softmax - Exponentiation",
+      "ph": "X",
+      "ts": 100000065444,
+      "dur": 411,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "Softmax.2",
+        "input_size": [
+          1,
+          32,
+          1,
+          257
+        ],
+        "output_size": [
+          1,
+          32,
+          1,
+          257
+        ]
+      }
+    },
+    {
+      "name": "Softmax - Normalize",
+      "ph": "X",
+      "ts": 100000065955,
+      "dur": 411,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "Softmax.3",
+        "input_size": [
+          1,
+          32,
+          1,
+          257
+        ],
+        "output_size": [
+          1,
+          32,
+          1,
+          257
+        ]
+      }
+    },
+    {
+      "name": "Attention Output",
+      "ph": "X",
+      "ts": 100000066466,
+      "dur": 26419,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          32,
+          1,
+          257
+        ],
+        "output_size": [
+          1,
+          1,
+          32,
+          64
+        ]
+      }
+    },
+    {
+      "name": "O Projection",
+      "ph": "X",
+      "ts": 100000092985,
+      "dur": 52428,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          2048
+        ]
+      }
+    },
+    {
+      "name": "Residual Connection",
+      "ph": "X",
+      "ts": 100000145513,
+      "dur": 51,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "MatAdd",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          2048
+        ]
+      }
+    },
+    {
+      "name": "RMSNorm (post)",
+      "ph": "X",
+      "ts": 100000145513,
+      "dur": 307,
+      "pid": 1,
+      "tid": 2,
+      "args": {
+        "op_type": "Norm",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          2048
+        ]
+      }
+    },
+    {
+      "name": "Gate Projection",
+      "ph": "X",
+      "ts": 100000145920,
+      "dur": 209715,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          8192
+        ]
+      }
+    },
+    {
+      "name": "Up Projection",
+      "ph": "X",
+      "ts": 100000145920,
+      "dur": 209715,
+      "pid": 1,
+      "tid": 2,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          8192
+        ]
+      }
+    },
+    {
+      "name": "SiLU & Mult",
+      "ph": "X",
+      "ts": 100000355735,
+      "dur": 409,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "Activation",
+        "input_size": [
+          1,
+          1,
+          8192
+        ],
+        "output_size": [
+          1,
+          1,
+          8192
+        ]
+      }
+    },
+    {
+      "name": "Down Projection",
+      "ph": "X",
+      "ts": 100000356244,
+      "dur": 209715,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "MatMul",
+        "input_size": [
+          1,
+          1,
+          8192
+        ],
+        "output_size": [
+          1,
+          1,
+          2048
+        ]
+      }
+    },
+    {
+      "name": "Residual Connection",
+      "ph": "X",
+      "ts": 100000566059,
+      "dur": 51,
+      "pid": 1,
+      "tid": 1,
+      "args": {
+        "op_type": "MatAdd",
+        "input_size": [
+          1,
+          1,
+          2048
+        ],
+        "output_size": [
+          1,
+          1,
+          2048
+        ]
+      }
+    }
+  ],
+  "displayTimeUnit": "ns"
+}
