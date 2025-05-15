@@ -29,18 +29,18 @@ class TransformerOpSimulator:
         
         if isinstance(self.operation, MatMul):
             compute_complexity = numel * args[1].shape[-2]
-            matmul_efficiency = 0.025
+            matmul_efficiency = 0.001 # Assume MatMul is extremely efficient
             return int(compute_complexity * self.base_cost_per_element * matmul_efficiency)
         
         elif isinstance(self.operation, MatAdd):
             # Residual connections are simple element-wise additions
-            residual_efficiency = 0.05
+            residual_efficiency = 0.25
             return int(numel * self.base_cost_per_element * residual_efficiency)
         
         elif isinstance(self.operation, torch.nn.Linear):
             # Matrix multiplication complexity: O(N*M*K)
             compute_complexity = numel * self.operation.out_features
-            matmul_efficiency = 0.025
+            matmul_efficiency = 0.001 # Assume MatMul is extremely efficient
             return int(compute_complexity * self.base_cost_per_element * matmul_efficiency)
 
         elif isinstance(self.operation, torch.nn.SiLU):
@@ -165,3 +165,4 @@ class SoftMax_Norm(SoftMax):
         Normalize the input tensor.
         """
         return exp / torch.sum(exp, dim=-1, keepdim=True)
+        
