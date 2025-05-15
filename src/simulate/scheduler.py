@@ -301,3 +301,4 @@ class ComputeScheduler:
     def save(self, trace_path):
         with open(trace_path, 'w') as f:
             json.dump(self.trace, f, indent=2)
+            
