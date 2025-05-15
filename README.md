@@ -30,3 +30,7 @@ All of this logic can be found in the `TransformerOpSimulator` class in `src/sim
 ![Visual Trace](trace/visual_trace.png)
 
 **BONUS**: For the bonus task, I have implemented a simple scheduling algorithm which can adapt to a hardware resource with any number of compute engines. Under the current implementation and the assumed kernel definitions, the optimal number of threads concurrently utilized during a transformer decoder layer is `3`. As shown in the figure above, the highest parallelization that can be done is the computation of `Q`, `K`, and `V` in parallel assuming the `MatMul` operator is the core kernel operation.
+
+## Bug
+If the Perfetto trace doesn't automatically open after running either script(s), this may likely be due to the `port:9001` already being used by another process.
+Kill that other process and rerun the script.
