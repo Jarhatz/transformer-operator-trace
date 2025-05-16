@@ -64,10 +64,9 @@ def open_trace(path, open_browser, origin):
   socketserver.TCPServer.allow_reuse_address = True
   with socketserver.TCPServer(('127.0.0.1', PORT), HttpHandler) as httpd:
     address = f'{origin}/#!/?url=http://127.0.0.1:{PORT}/{fname}&referrer=open_trace_in_ui'
+    print(f'Open URL in browser: {address}')
     if open_browser:
       webbrowser.open_new_tab(address)
-    else:
-      print(f'Open URL in browser: {address}')
 
     httpd.expected_fname = fname
     httpd.fname_get_completed = None
