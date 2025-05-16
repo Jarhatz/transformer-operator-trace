@@ -7,9 +7,7 @@ import torch
 from transformers import AutoModelForCausalLM
 
 
-def load(model_id: str, n_tokens: int):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+def load(model_id: str, n_tokens: int, device: str="cpu"):
     # Load model
     model = AutoModelForCausalLM.from_pretrained(model_id)
     decoder_layer = model.model.layers[0].to(device)
@@ -80,10 +78,16 @@ if __name__ == '__main__':
         default=4,
         help="Number of tokens to use for tracing the transformer block"
     )
+    parser.add_argument(
+        "--device",
+        type=str,
+        default="cpu",
+        help="Device to use for tracing the transformer block"
+    )
     args = parser.parse_args()
 
     # Load model and sample inputs
-    inputs = load(args.model_id, args.n_tokens)
+    inputs = load(args.model_id, args.n_tokens, args.device)
 
     # Trace the transformer block
     trace_path = trace(args.model_id, *inputs)
