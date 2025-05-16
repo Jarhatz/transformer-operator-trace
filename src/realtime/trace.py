@@ -7,7 +7,7 @@ import torch
 from transformers import AutoModelForCausalLM
 
 
-def load(model_id: str, n_tokens: int, device: str="cpu"):
+def load(model_id: str, n_tokens: int, device: str):
     # Load model
     model = AutoModelForCausalLM.from_pretrained(model_id)
     decoder_layer = model.model.layers[0].to(device)
